@@ -1,0 +1,23 @@
+{
+  "debug": true,
+  "server": {
+    "address": ":9090"
+  },
+  "context": {
+    "timeout": 2
+  },
+  "database": {
+    "host": "postgres",
+    "port": "5432",
+    "user": "admin",
+    "pass": "secret",
+    "name": "vending_machine"
+  },
+  "jwt": {
+    "secret": "my-jwt-secret-key",
+    "duration": 3600
+  },
+  "deposit": {
+    "timeout": 2
+  }
+}

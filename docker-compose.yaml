@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vending_machine_api
+    ports:
+      - 9090:9090
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./config.json:/app/config.json
+
+  postgres:
+    image: postgres:14 
+    container_name: vending_machine_postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: vending_machine
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready", "-U", "admin"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
